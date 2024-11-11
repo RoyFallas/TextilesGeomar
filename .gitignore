@@ -1,9 +1,9 @@
 # Ignore build outputs and NuGet packages
-bin/
-obj/
+.bin/
+.obj/
 *.user
 *.rsuser
-*.suo
+*.suo 5 
 *.userosscache
 *.sln.docstates
 

@@ -16,6 +16,7 @@ builder.Services.AddDbContext<TextilesGeomarDBContext>(options =>
 // Register services and repositories
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddSingleton<IRabbitMqProducerService, RabbitMqProducerService>();
 
 // Register Swagger for API documentation
 builder.Services.AddEndpointsApiExplorer();
