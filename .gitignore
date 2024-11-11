@@ -1,1 +1,74 @@
+# Ignore build outputs and NuGet packages
+bin/
+obj/
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs, generated files, and results
+*.log
+*.nlog
+*.out
+*.err
+*.ide
+*.coverage
+*.coveragexml
+TestResults/
+*.pdb
+*.mdb
+
+# Visual Studio specific files
+.vscode/
 .vs/
+.vscode/
+
+# Ignore ReSharper files
+_ReSharper*/
+*.[rR]e[Ss]harper
+*.DotSettings.user
+
+# Ignore Rider files
+.idea/
+
+# Ignore Rider and VSCode specific files
+.idea/
+*.sln.iml
+*.vs/
+*.suo
+.vscode/
+
+# Ignore generated folders and config
+publish/
+dist/
+lib/
+test-results/
+site/
+.temp/
+
+# Ignore runtime and build files
+artifacts/
+logs/
+temp/
+.lazypic/
+dependencies/
+**/[Dd]ependencies
+dependency-dot-tree.*
+*.coverage
+AppPackages/
+packages/
+artifacts/
+
+# Ignore secrets and sensitive data
+secrets.json
+secrets.*
+*.vault
+*.cert*
+
+# Ignore nuget packages folder
+packages/
+
+# Ignore by VS Code settings 
+.vscode/
+.vscode-settings
