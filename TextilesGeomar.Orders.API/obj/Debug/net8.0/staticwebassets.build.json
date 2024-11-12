@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "ZS3w8fGkD2WSc1DifTqhwkHfGs57dWgGT9b6dU4W/ZY=",
+  "Source": "TextilesGeomar.Orders.API",
+  "BasePath": "_content/TextilesGeomar.Orders.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\Users\\royfa\\OneDrive\\Escritorio\\Desktop Files\\Work 2025\\Learning\\Projects\\Textiles Geomar\\Back End\\TextilesGeomar\\TextilesGeomar\\TextilesGeomar.API\\TextilesGeomar.API.csproj",
+      "Version": 2,
+      "Source": "TextilesGeomar.API",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

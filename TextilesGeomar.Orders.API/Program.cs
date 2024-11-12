@@ -1,3 +1,6 @@
+using TextilesGeomar.Orders.API.Services;
+using TextilesGeomar.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Register services
+builder.Services.AddHostedService<RabbitMqConsumerService>();
 
 var app = builder.Build();
 

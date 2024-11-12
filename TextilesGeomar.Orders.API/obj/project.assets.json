@@ -3333,6 +3333,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "RabbitMQ.Client >= 7.0.0",
       "Swashbuckle.AspNetCore >= 6.9.0",
       "TextilesGeomar.API >= 1.0.0"
     ]
@@ -3386,6 +3387,10 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "RabbitMQ.Client": {
+            "target": "Package",
+            "version": "[7.0.0, )"
+          },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.9.0, )"
