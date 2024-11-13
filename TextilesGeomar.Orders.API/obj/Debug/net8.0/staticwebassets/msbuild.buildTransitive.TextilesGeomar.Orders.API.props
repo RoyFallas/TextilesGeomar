@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\TextilesGeomar.Orders.API.props" />
-</Project>
