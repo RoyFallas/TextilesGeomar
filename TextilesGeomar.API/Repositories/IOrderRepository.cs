@@ -1,4 +1,4 @@
-﻿using TextilesGeomar.API.Models;
+﻿using TextilesGeomar.Core.Models;
 
 namespace TextilesGeomar.Data.Repositories
 {

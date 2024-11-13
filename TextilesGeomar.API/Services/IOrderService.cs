@@ -1,6 +1,6 @@
-﻿using TextilesGeomar.Models.DTOs;
+﻿using TextilesGeomar.Core.Models.DTOs;
 
-namespace TextilesGeomar.Services
+namespace TextilesGeomar.Services 
 {
     public interface IOrderService
     {

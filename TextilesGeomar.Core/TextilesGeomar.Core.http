@@ -1,0 +1,6 @@
+@TextilesGeomar.Core_HostAddress = http://localhost:5220
+
+GET {{TextilesGeomar.Core_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

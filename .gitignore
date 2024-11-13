@@ -1,11 +1,17 @@
 # Ignore build outputs and NuGet packages
-.bin/
-.obj/
+TextilesGeomar.API/bin/
+TextilesGeomar.API/obj/
+TextilesGeomar.Orders.API/bin/
+TextilesGeomar.Orders.API/obj
+TextilesGeomar.Core/bin/
+TextilesGeomar.Core/obj/
 *.user
 *.rsuser
 *.suo 5 
 *.userosscache
 *.sln.docstates
+**/bin/*.dll
+**/obj/
 
 # Logs, generated files, and results
 *.log

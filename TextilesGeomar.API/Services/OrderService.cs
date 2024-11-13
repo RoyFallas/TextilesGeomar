@@ -1,7 +1,6 @@
 ﻿using TextilesGeomar.Data.Repositories;
-using TextilesGeomar.Models;
-using TextilesGeomar.Models.DTOs;
-
+using TextilesGeomar.Core.Models;
+using TextilesGeomar.Core.Models.DTOs;
 namespace TextilesGeomar.Services
 {
     public class OrderService : IOrderService

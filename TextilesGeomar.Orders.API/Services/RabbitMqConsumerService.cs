@@ -3,8 +3,10 @@ using System.Text.Json;
 using Microsoft.EntityFrameworkCore.Metadata;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using TextilesGeomar.Models.DTOs;
+using TextilesGeomar.Core.Models.DTOs;
 using TextilesGeomar.Services;
+using TextilesGeomar.Core.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace TextilesGeomar.Orders.API.Services
 {
@@ -13,14 +15,16 @@ namespace TextilesGeomar.Orders.API.Services
         private readonly ConnectionFactory _factory;
         private IConnection _connection;
         private IModel _channel;
+        private readonly IServiceProvider _serviceProvider;
 
-        public RabbitMqConsumerService()
+        public RabbitMqConsumerService(IServiceProvider serviceProvider)
         {
             _factory = new ConnectionFactory()
             {
                 HostName = "localhost",  // Replace with actual RabbitMQ host
                 Port = 5672,
             };
+            _serviceProvider = serviceProvider;
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
@@ -40,12 +44,37 @@ namespace TextilesGeomar.Orders.API.Services
             // Setup an async consumer for handling incoming messages
             var consumer = new AsyncEventingBasicConsumer(channel);
 
-            consumer.ReceivedAsync += (model, ea) =>
+            consumer.ReceivedAsync += async (model, ea) =>
             {
                 byte[] body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
-                Console.WriteLine($" [x] Received {message}");
-                return Task.CompletedTask;
+
+                // Deserialize JSON message to Order object
+                try
+                {
+                    var order = JsonSerializer.Deserialize<Order>(message);
+
+                    if (order != null)
+                    {
+                        // Process the order (for example, log the details)
+                        Console.WriteLine($"Received Order: Item ID = {order.ItemId}, Uniform ID = {order.UniformId}, Client ID = {order.ClientId}, Institution ID = {order.InstitutionId}, Status ID = {order.StatusId}, Created Date = {order.CreatedDate}, Completed Date = {order.CompletedDate?.ToString() ?? "null"}");
+
+                        // Create a new scope and resolve IOrderService
+                        using (var scope = _serviceProvider.CreateScope())
+                        {
+                            var orderService = scope.ServiceProvider.GetRequiredService<IOrderService>();
+                            await orderService.SaveOrder(order);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Order message could not be deserialized.");
+                    }
+                }
+                catch (JsonException ex)
+                {
+                    Console.WriteLine($"Error deserializing order: {ex.Message}");
+                }
             };
 
             await channel.BasicConsumeAsync(queueName, autoAck: true, consumer: consumer);

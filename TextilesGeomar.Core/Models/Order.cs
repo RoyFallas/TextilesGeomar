@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TextilesGeomar.API.Models;
+namespace TextilesGeomar.Core.Models;
 
 public partial class Order
 {
@@ -21,13 +21,13 @@ public partial class Order
 
     public DateTime? CompletedDate { get; set; }
 
-    public virtual Client Client { get; set; } = null!;
+    public virtual Client? Client { get; set; } = null!;
 
     public virtual Institution? Institution { get; set; }
 
     public virtual Item? Item { get; set; }
 
-    public virtual OrderStatus Status { get; set; } = null!;
+    public virtual OrderStatus? Status { get; set; } = null!;
 
     public virtual Uniform? Uniform { get; set; }
 }

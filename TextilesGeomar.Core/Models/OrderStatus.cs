@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TextilesGeomar.API.Models;
+namespace TextilesGeomar.Core.Models;
 
 public partial class OrderStatus
 {

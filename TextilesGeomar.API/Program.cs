@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using TextilesGeomar.API.Data;
+using TextilesGeomar.Core.Data;
 using TextilesGeomar.Data.Repositories;
 using TextilesGeomar.Services;
 using TextilesGeomar.Middleware; // Add this namespace for middleware

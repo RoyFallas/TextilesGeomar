@@ -1,7 +1,8 @@
 ﻿using System.Text;
 using System.Text.Json;
 using RabbitMQ.Client;
-using TextilesGeomar.Models.DTOs;
+using TextilesGeomar.Core.Models;
+using TextilesGeomar.Core.Models.DTOs;
 
 namespace TextilesGeomar.Services
 {
@@ -18,7 +19,7 @@ namespace TextilesGeomar.Services
             };
         }
 
-        public async Task SendOrderToQueueAsync(OrderDto order)
+        public async Task SendOrderToQueueAsync(Order order)
         {
             using var connection = await _factory.CreateConnectionAsync();
             using var channel = await connection.CreateChannelAsync();
@@ -35,6 +36,6 @@ namespace TextilesGeomar.Services
 
     public interface IRabbitMqProducerService
     {
-        Task SendOrderToQueueAsync(OrderDto order);
+        Task SendOrderToQueueAsync(Order order);
     }
 }

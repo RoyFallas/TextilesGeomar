@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TextilesGeomar.Common.Responses; // Add this namespace for BaseResponse
-using TextilesGeomar.Models.DTOs;
+using TextilesGeomar.Core.Models;
+using TextilesGeomar.Core.Models.DTOs;
 using TextilesGeomar.Services;
 
 namespace TextilesGeomar.API.Controllers
@@ -34,7 +35,7 @@ namespace TextilesGeomar.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<BaseResponse<string>>> Order([FromBody] OrderDto order)
+        public async Task<ActionResult<BaseResponse<string>>> Order([FromBody] Order order)
         {
             try
             {

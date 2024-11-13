@@ -5,7 +5,9 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextilesGeomar.API", "TextilesGeomar.API\TextilesGeomar.API.csproj", "{D0DF1F6A-1DCC-458B-BDE7-BB74F257AAD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextilesGeomar.Orders.API", "TextilesGeomar.Orders.API\TextilesGeomar.Orders.API.csproj", "{FD49FB03-9953-4F6E-9DA6-E0B576280018}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TextilesGeomar.Orders.API", "TextilesGeomar.Orders.API\TextilesGeomar.Orders.API.csproj", "{FD49FB03-9953-4F6E-9DA6-E0B576280018}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextilesGeomar.Core", "TextilesGeomar.Core\TextilesGeomar.Core.csproj", "{6898490B-89F1-44A0-8668-5FF521E8E3CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{FD49FB03-9953-4F6E-9DA6-E0B576280018}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD49FB03-9953-4F6E-9DA6-E0B576280018}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD49FB03-9953-4F6E-9DA6-E0B576280018}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6898490B-89F1-44A0-8668-5FF521E8E3CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6898490B-89F1-44A0-8668-5FF521E8E3CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6898490B-89F1-44A0-8668-5FF521E8E3CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6898490B-89F1-44A0-8668-5FF521E8E3CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

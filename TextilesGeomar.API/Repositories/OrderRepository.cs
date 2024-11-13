@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TextilesGeomar.API.Data;
-using TextilesGeomar.API.Models;
-using TextilesGeomar.Models;
+using TextilesGeomar.Core.Data;
+using TextilesGeomar.Core.Models;
 
 namespace TextilesGeomar.Data.Repositories
 {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using TextilesGeomar.API.Models;
+using TextilesGeomar.Core.Models;
 
-namespace TextilesGeomar.API.Data;
+namespace TextilesGeomar.Core.Data;
 
 public partial class TextilesGeomarDBContext : DbContext
 {

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TextilesGeomar.Orders.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f489062902acd3d3fe86b95ce5450b92f082d52f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0c9d3968df8c0134aab20ac0e1afdea3281dc794")]
 [assembly: System.Reflection.AssemblyProductAttribute("TextilesGeomar.Orders.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TextilesGeomar.Orders.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
