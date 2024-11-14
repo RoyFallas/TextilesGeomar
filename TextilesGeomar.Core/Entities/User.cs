@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TextilesGeomar.Core.Models;
+namespace TextilesGeomar.Core.Entities;
 
-public partial class Client
+public partial class User
 {
-    public int ClientId { get; set; }
+    public int UserId { get; set; }
 
-    public int? InstitutionId { get; set; }
+    public int RoleId { get; set; }
 
     public string Name { get; set; } = null!;
 
@@ -19,7 +19,7 @@ public partial class Client
 
     public string? Phone { get; set; }
 
-    public virtual Institution? Institution { get; set; }
+    public string Password { get; set; } = null!;
 
-    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+    public virtual Role Role { get; set; } = null!;
 }

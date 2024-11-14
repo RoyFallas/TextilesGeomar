@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using TextilesGeomar.Core.Models;
+using TextilesGeomar.Core.Entities;
 
 namespace TextilesGeomar.Core.Data;
 

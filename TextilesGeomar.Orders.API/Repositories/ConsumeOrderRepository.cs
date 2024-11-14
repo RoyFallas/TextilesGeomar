@@ -1,15 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TextilesGeomar.Core.Data;
-using TextilesGeomar.Core.Models;
-using TextilesGeomar.Core.Models.DTOs;
+using TextilesGeomar.Core.Entities;
+using TextilesGeomar.Core.Interfaces.Repositories;
 
 namespace TextilesGeomar.Orders.API.Repositories
 {
-    public class OrderRepository : IOrderRepository
+    public class ConsumeOrderRepository : IConsumeOrderRepository
     {
         private readonly TextilesGeomarDBContext _context;
 
-        public OrderRepository(TextilesGeomarDBContext context)
+        public ConsumeOrderRepository(TextilesGeomarDBContext context)
         {
             _context = context;
         }

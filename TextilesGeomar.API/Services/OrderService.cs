@@ -1,7 +1,7 @@
-﻿using TextilesGeomar.Data.Repositories;
-using TextilesGeomar.Core.Models;
+﻿using TextilesGeomar.Core.Interfaces.Services;
+using TextilesGeomar.Core.Interfaces.Repositories;
 using TextilesGeomar.Core.Models.DTOs;
-namespace TextilesGeomar.Services
+namespace TextilesGeomar.API.Services
 {
     public class OrderService : IOrderService
     {

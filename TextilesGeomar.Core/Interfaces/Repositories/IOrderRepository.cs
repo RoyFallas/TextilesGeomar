@@ -1,6 +1,6 @@
-﻿using TextilesGeomar.Core.Models;
+﻿using TextilesGeomar.Core.Entities;
 
-namespace TextilesGeomar.Data.Repositories
+namespace TextilesGeomar.Core.Interfaces.Repositories
 {
     public interface IOrderRepository
     {

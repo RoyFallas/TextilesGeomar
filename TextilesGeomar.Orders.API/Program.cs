@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using TextilesGeomar.Core.Data;
+using TextilesGeomar.Core.Interfaces.Repositories;
+using TextilesGeomar.Core.Interfaces.Services;
 using TextilesGeomar.Orders.API.Repositories;
 using TextilesGeomar.Orders.API.Services;
 
@@ -13,13 +15,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Register services
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-builder.Services.AddScoped<IOrderService, OrderService>();
+//// Register services
+builder.Services.AddScoped<IConsumeOrderRepository, ConsumeOrderRepository>();
+builder.Services.AddScoped<IConsumeOrderService, ConsumeOrderService>();
 builder.Services.AddSingleton<IHostedService, RabbitMqConsumerService>();
 
 
-// Registering DbContext with dependency injection
+//// Registering DbContext with dependency injection
 builder.Services.AddDbContext<TextilesGeomarDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 

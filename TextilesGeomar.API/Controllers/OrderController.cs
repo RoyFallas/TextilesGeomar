@@ -1,19 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TextilesGeomar.Common.Responses; // Add this namespace for BaseResponse
-using TextilesGeomar.Core.Models;
+using TextilesGeomar.API.Services;
+using TextilesGeomar.Common.Responses;
+using TextilesGeomar.Core.Entities;
+using TextilesGeomar.Core.Interfaces.Services;
 using TextilesGeomar.Core.Models.DTOs;
-using TextilesGeomar.Services;
+
 
 namespace TextilesGeomar.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OrdersController : ControllerBase
+    public class OrderController : ControllerBase
     {
         private readonly IOrderService _orderService;
         private readonly IRabbitMqProducerService _rabbitMqProducerService;
 
-        public OrdersController(IOrderService orderService, IRabbitMqProducerService rabbitMqProducerService)
+        public OrderController(IOrderService orderService, IRabbitMqProducerService rabbitMqProducerService)
         {
             _orderService = orderService;
             _rabbitMqProducerService = rabbitMqProducerService;

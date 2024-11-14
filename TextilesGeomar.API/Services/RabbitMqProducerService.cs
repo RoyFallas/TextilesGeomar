@@ -1,10 +1,9 @@
 ﻿using System.Text;
 using System.Text.Json;
 using RabbitMQ.Client;
-using TextilesGeomar.Core.Models;
-using TextilesGeomar.Core.Models.DTOs;
+using TextilesGeomar.Core.Entities;
 
-namespace TextilesGeomar.Services
+namespace TextilesGeomar.API.Services
 {
     public class RabbitMqProducerService : IRabbitMqProducerService
     {

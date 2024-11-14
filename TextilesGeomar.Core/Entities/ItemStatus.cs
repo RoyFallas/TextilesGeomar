@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TextilesGeomar.Core.Models;
+namespace TextilesGeomar.Core.Entities;
 
 public partial class ItemStatus
 {

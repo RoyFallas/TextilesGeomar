@@ -12,14 +12,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TextilesGeomar.API\TextilesGeomar.API.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Data\" />
     <Folder Include="Middleware\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TextilesGeomar.Core\TextilesGeomar.Core.csproj" />
   </ItemGroup>
 
 </Project>

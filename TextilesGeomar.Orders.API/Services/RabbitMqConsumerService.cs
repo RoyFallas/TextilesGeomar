@@ -3,10 +3,8 @@ using System.Text.Json;
 using Microsoft.EntityFrameworkCore.Metadata;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using TextilesGeomar.Core.Models.DTOs;
-using TextilesGeomar.Services;
-using TextilesGeomar.Core.Models;
-using Microsoft.Extensions.DependencyInjection;
+using TextilesGeomar.Core.Entities;
+using TextilesGeomar.Core.Interfaces.Services;
 
 namespace TextilesGeomar.Orders.API.Services
 {
@@ -62,7 +60,7 @@ namespace TextilesGeomar.Orders.API.Services
                         // Create a new scope and resolve IOrderService
                         using (var scope = _serviceProvider.CreateScope())
                         {
-                            var orderService = scope.ServiceProvider.GetRequiredService<IOrderService>();
+                            var orderService = scope.ServiceProvider.GetRequiredService<IConsumeOrderService>();
                             await orderService.SaveOrder(order);
                         }
                     }

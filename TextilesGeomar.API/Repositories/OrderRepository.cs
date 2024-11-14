@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using TextilesGeomar.Core.Interfaces.Repositories;
 using TextilesGeomar.Core.Data;
-using TextilesGeomar.Core.Models;
+using TextilesGeomar.Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace TextilesGeomar.Data.Repositories
+namespace TextilesGeomar.API.Repositories
 {
     public class OrderRepository : IOrderRepository
     {
