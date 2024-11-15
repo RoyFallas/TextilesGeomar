@@ -6,16 +6,16 @@ namespace TextilesGeomar.Orders.API.Services
 {
     public class ConsumeOrderService : IConsumeOrderService
     {
-        private readonly IConsumeOrderRepository _orderRepository;
+        private readonly IConsumeOrderRepository _consumeOrderRepository;
 
-        public ConsumeOrderService(IConsumeOrderRepository orderRepository)
+        public ConsumeOrderService(IConsumeOrderRepository consumeOrderRepository)
         {
-            _orderRepository = orderRepository;
+            _consumeOrderRepository = consumeOrderRepository;
         }
 
         public async Task SaveOrder(Order order)
         {
-            await _orderRepository.SaveOrder(order);
+            await _consumeOrderRepository.SaveOrder(order);
         }
     }
 }

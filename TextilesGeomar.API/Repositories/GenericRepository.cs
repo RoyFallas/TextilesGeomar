@@ -1,6 +1,6 @@
 ﻿namespace TextilesGeomar.API.Repositories
 {
-    public class Repository
+    public class GenericRepository
     {
     }
 }

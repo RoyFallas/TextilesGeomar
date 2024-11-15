@@ -60,8 +60,8 @@ namespace TextilesGeomar.Orders.API.Services
                         // Create a new scope and resolve IOrderService
                         using (var scope = _serviceProvider.CreateScope())
                         {
-                            var orderService = scope.ServiceProvider.GetRequiredService<IConsumeOrderService>();
-                            await orderService.SaveOrder(order);
+                            var consumerOrderService = scope.ServiceProvider.GetRequiredService<IConsumeOrderService>();
+                            await consumerOrderService.SaveOrder(order);
                         }
                     }
                     else

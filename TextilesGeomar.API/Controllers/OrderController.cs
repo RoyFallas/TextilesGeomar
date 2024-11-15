@@ -43,6 +43,7 @@ namespace TextilesGeomar.API.Controllers
             {
                 // Send the order to RabbitMQ
                 await _rabbitMqProducerService.SendOrderToQueueAsync(order);
+                
 
                 return Ok(BaseResponse<string>.SuccessResponse("Order has been sent to the queue."));
             }
