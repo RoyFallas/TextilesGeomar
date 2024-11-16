@@ -2,6 +2,7 @@
 using System.Text.Json;
 using RabbitMQ.Client;
 using TextilesGeomar.Core.Entities;
+using TextilesGeomar.Core.Interfaces.Services;
 
 namespace TextilesGeomar.API.Services
 {
@@ -31,10 +32,5 @@ namespace TextilesGeomar.API.Services
             await channel.BasicPublishAsync(exchange: string.Empty, routingKey: "orderQueue", body: body);
             Console.WriteLine($" [x] Sent {message}");
         }
-    }
-
-    public interface IRabbitMqProducerService
-    {
-        Task SendOrderToQueueAsync(Order order);
     }
 }

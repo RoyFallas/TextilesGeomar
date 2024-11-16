@@ -11,8 +11,6 @@ namespace TextilesGeomar.Orders.API.Services
     public class RabbitMqConsumerService : IHostedService
     {
         private readonly ConnectionFactory _factory;
-        private IConnection _connection;
-        private IModel _channel;
         private readonly IServiceProvider _serviceProvider;
 
         public RabbitMqConsumerService(IServiceProvider serviceProvider)
@@ -55,7 +53,7 @@ namespace TextilesGeomar.Orders.API.Services
                     if (order != null)
                     {
                         // Process the order (for example, log the details)
-                        Console.WriteLine($"Received Order: Item ID = {order.ItemId}, Uniform ID = {order.UniformId}, Client ID = {order.ClientId}, Institution ID = {order.InstitutionId}, Status ID = {order.StatusId}, Created Date = {order.CreatedDate}, Completed Date = {order.CompletedDate?.ToString() ?? "null"}");
+                        //Console.WriteLine($"Received Order: Item ID = {order.}, Uniform ID = {order.UniformId}, Client ID = {order.ClientId}, Institution ID = {order.InstitutionId}, Status ID = {order.StatusId}, Created Date = {order.CreatedDate}, Completed Date = {order.CompletedDate?.ToString() ?? "null"}");
 
                         // Create a new scope and resolve IOrderService
                         using (var scope = _serviceProvider.CreateScope())

@@ -22,21 +22,21 @@ public partial class TextilesGeomarDBContext : DbContext
 
     public virtual DbSet<Item> Items { get; set; }
 
-    public virtual DbSet<ItemStatus> ItemStatuses { get; set; }
-
     public virtual DbSet<NotificationHistory> NotificationHistories { get; set; }
 
     public virtual DbSet<Order> Orders { get; set; }
 
-    public virtual DbSet<OrderStatus> OrderStatuses { get; set; }
+    public virtual DbSet<OrderDetail> OrderDetails { get; set; }
 
     public virtual DbSet<PriceHistory> PriceHistories { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
 
+    public virtual DbSet<Status> Statuses { get; set; }
+
     public virtual DbSet<Uniform> Uniforms { get; set; }
 
-    public virtual DbSet<UniformStatus> UniformStatuses { get; set; }
+    public virtual DbSet<UniformItem> UniformItems { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
@@ -48,9 +48,11 @@ public partial class TextilesGeomarDBContext : DbContext
     {
         modelBuilder.Entity<Client>(entity =>
         {
-            entity.HasKey(e => e.ClientId).HasName("PK__Clients__E67E1A246B49395D");
+            entity.HasKey(e => e.ClientId).HasName("PK__Client__E67E1A24C4B4C72E");
 
-            entity.HasIndex(e => e.Email, "UQ__Clients__A9D105343A4CFB9B").IsUnique();
+            entity.ToTable("Client");
+
+            entity.HasIndex(e => e.Email, "UQ__Client__A9D10534348C397B").IsUnique();
 
             entity.Property(e => e.Address).HasMaxLength(255);
             entity.Property(e => e.Email).HasMaxLength(100);
@@ -60,12 +62,14 @@ public partial class TextilesGeomarDBContext : DbContext
 
             entity.HasOne(d => d.Institution).WithMany(p => p.Clients)
                 .HasForeignKey(d => d.InstitutionId)
-                .HasConstraintName("FK__Clients__Institu__412EB0B6");
+                .HasConstraintName("FK__Client__Institut__412EB0B6");
         });
 
         modelBuilder.Entity<Institution>(entity =>
         {
-            entity.HasKey(e => e.InstitutionId).HasName("PK__Institut__8DF6B6ADFFD918DB");
+            entity.HasKey(e => e.InstitutionId).HasName("PK__Institut__8DF6B6AD4165F61C");
+
+            entity.ToTable("Institution");
 
             entity.Property(e => e.Address).HasMaxLength(255);
             entity.Property(e => e.Name).HasMaxLength(100);
@@ -74,7 +78,9 @@ public partial class TextilesGeomarDBContext : DbContext
 
         modelBuilder.Entity<Item>(entity =>
         {
-            entity.HasKey(e => e.ItemId).HasName("PK__Items__727E838BEAA695AD");
+            entity.HasKey(e => e.ItemId).HasName("PK__Item__727E838BE6865916");
+
+            entity.ToTable("Item");
 
             entity.Property(e => e.Color).HasMaxLength(50);
             entity.Property(e => e.Description).HasMaxLength(255);
@@ -85,28 +91,18 @@ public partial class TextilesGeomarDBContext : DbContext
 
             entity.HasOne(d => d.Institution).WithMany(p => p.Items)
                 .HasForeignKey(d => d.InstitutionId)
-                .HasConstraintName("FK__Items__Instituti__4F7CD00D");
-
-            entity.HasOne(d => d.Status).WithMany(p => p.Items)
-                .HasForeignKey(d => d.StatusId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Items__StatusId__4E88ABD4");
+                .HasConstraintName("FK__Item__Institutio__4AB81AF0");
 
             entity.HasOne(d => d.Uniform).WithMany(p => p.Items)
                 .HasForeignKey(d => d.UniformId)
-                .HasConstraintName("FK__Items__UniformId__4D94879B");
-        });
-
-        modelBuilder.Entity<ItemStatus>(entity =>
-        {
-            entity.HasKey(e => e.StatusId).HasName("PK__ItemStat__C8EE206303C231D9");
-
-            entity.Property(e => e.Name).HasMaxLength(100);
+                .HasConstraintName("FK__Item__UniformId__49C3F6B7");
         });
 
         modelBuilder.Entity<NotificationHistory>(entity =>
         {
-            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E121E9F724C");
+            entity.HasKey(e => e.NotificationId).HasName("PK__Notifica__20CF2E123E343459");
+
+            entity.ToTable("NotificationHistory");
 
             entity.Property(e => e.EntityType).HasMaxLength(50);
             entity.Property(e => e.NotificationType).HasMaxLength(50);
@@ -119,7 +115,9 @@ public partial class TextilesGeomarDBContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BCF87942B29");
+            entity.HasKey(e => e.OrderId).HasName("PK__Order__C3905BCFB5912441");
+
+            entity.ToTable("Order");
 
             entity.Property(e => e.CompletedDate).HasColumnType("datetime");
             entity.Property(e => e.CreatedDate)
@@ -129,36 +127,52 @@ public partial class TextilesGeomarDBContext : DbContext
             entity.HasOne(d => d.Client).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.ClientId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Orders__ClientId__5535A963");
+                .HasConstraintName("FK__Order__ClientId__5441852A");
 
             entity.HasOne(d => d.Institution).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.InstitutionId)
-                .HasConstraintName("FK__Orders__Institut__5629CD9C");
-
-            entity.HasOne(d => d.Item).WithMany(p => p.Orders)
-                .HasForeignKey(d => d.ItemId)
-                .HasConstraintName("FK__Orders__ItemId__534D60F1");
+                .HasConstraintName("FK__Order__Instituti__5535A963");
 
             entity.HasOne(d => d.Status).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.StatusId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Orders__StatusId__571DF1D5");
+                .HasConstraintName("FK__Order__StatusId__571DF1D5");
 
-            entity.HasOne(d => d.Uniform).WithMany(p => p.Orders)
-                .HasForeignKey(d => d.UniformId)
-                .HasConstraintName("FK__Orders__UniformI__5441852A");
+            entity.HasOne(d => d.User).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Order__UserId__5629CD9C");
         });
 
-        modelBuilder.Entity<OrderStatus>(entity =>
+        modelBuilder.Entity<OrderDetail>(entity =>
         {
-            entity.HasKey(e => e.StatusId).HasName("PK__OrderSta__C8EE2063514BE48B");
+            entity.HasKey(e => e.OrderDetailId).HasName("PK__OrderDet__D3B9D36C142C03F0");
 
-            entity.Property(e => e.Name).HasMaxLength(100);
+            entity.ToTable("OrderDetail");
+
+            entity.Property(e => e.Discount).HasColumnType("decimal(5, 2)");
+            entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Quantity).HasDefaultValue(1);
+
+            entity.HasOne(d => d.Item).WithMany(p => p.OrderDetails)
+                .HasForeignKey(d => d.ItemId)
+                .HasConstraintName("FK__OrderDeta__ItemI__5DCAEF64");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.OrderDetails)
+                .HasForeignKey(d => d.OrderId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__OrderDeta__Order__5BE2A6F2");
+
+            entity.HasOne(d => d.UniformItem).WithMany(p => p.OrderDetails)
+                .HasForeignKey(d => d.UniformItemId)
+                .HasConstraintName("FK__OrderDeta__Unifo__5CD6CB2B");
         });
 
         modelBuilder.Entity<PriceHistory>(entity =>
         {
-            entity.HasKey(e => e.PriceHistoryId).HasName("PK__PriceHis__A927CACBA2636365");
+            entity.HasKey(e => e.PriceHistoryId).HasName("PK__PriceHis__A927CACB38393A34");
+
+            entity.ToTable("PriceHistory");
 
             entity.Property(e => e.ChangeDate)
                 .HasDefaultValueSql("(getdate())")
@@ -168,18 +182,32 @@ public partial class TextilesGeomarDBContext : DbContext
 
             entity.HasOne(d => d.Item).WithMany(p => p.PriceHistories)
                 .HasForeignKey(d => d.ItemId)
-                .HasConstraintName("FK__PriceHist__ItemI__5AEE82B9");
+                .HasConstraintName("FK__PriceHist__ItemI__619B8048");
 
             entity.HasOne(d => d.Uniform).WithMany(p => p.PriceHistories)
                 .HasForeignKey(d => d.UniformId)
-                .HasConstraintName("FK__PriceHist__Unifo__5BE2A6F2");
+                .HasConstraintName("FK__PriceHist__Unifo__628FA481");
         });
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.RoleId).HasName("PK__Roles__8AFACE1A3BC06CB1");
+            entity.HasKey(e => e.RoleId).HasName("PK__Role__8AFACE1AF279E833");
 
-            entity.HasIndex(e => e.Name, "UQ__Roles__737584F6ECD4A9BF").IsUnique();
+            entity.ToTable("Role");
+
+            entity.HasIndex(e => e.Name, "UQ__Role__737584F6F3C24C52").IsUnique();
+
+            entity.Property(e => e.Description).HasMaxLength(255);
+            entity.Property(e => e.Name).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<Status>(entity =>
+        {
+            entity.HasKey(e => e.StatusId).HasName("PK__Status__C8EE2063C9CC6F78");
+
+            entity.ToTable("Status");
+
+            entity.HasIndex(e => e.Name, "UQ__Status__737584F68F12754D").IsUnique();
 
             entity.Property(e => e.Description).HasMaxLength(255);
             entity.Property(e => e.Name).HasMaxLength(100);
@@ -187,33 +215,43 @@ public partial class TextilesGeomarDBContext : DbContext
 
         modelBuilder.Entity<Uniform>(entity =>
         {
-            entity.HasKey(e => e.UniformId).HasName("PK__Uniforms__FF513A5000D69BB8");
+            entity.HasKey(e => e.UniformId).HasName("PK__Uniform__FF513A500CDBD25C");
+
+            entity.ToTable("Uniform");
 
             entity.Property(e => e.Name).HasMaxLength(100);
-            entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
 
             entity.HasOne(d => d.Institution).WithMany(p => p.Uniforms)
                 .HasForeignKey(d => d.InstitutionId)
-                .HasConstraintName("FK__Uniforms__Instit__49C3F6B7");
-
-            entity.HasOne(d => d.Status).WithMany(p => p.Uniforms)
-                .HasForeignKey(d => d.StatusId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Uniforms__Status__4AB81AF0");
+                .HasConstraintName("FK__Uniform__Institu__46E78A0C");
         });
 
-        modelBuilder.Entity<UniformStatus>(entity =>
+        modelBuilder.Entity<UniformItem>(entity =>
         {
-            entity.HasKey(e => e.StatusId).HasName("PK__UniformS__C8EE2063CF99C4C6");
+            entity.HasKey(e => e.UniformItemId).HasName("PK__UniformI__CEF736A319CBB45E");
 
-            entity.Property(e => e.Name).HasMaxLength(100);
+            entity.HasIndex(e => new { e.UniformId, e.ItemId }, "UC_UniformItem").IsUnique();
+
+            entity.Property(e => e.Quantity).HasDefaultValue(1);
+
+            entity.HasOne(d => d.Item).WithMany(p => p.UniformItems)
+                .HasForeignKey(d => d.ItemId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__UniformIt__ItemI__5070F446");
+
+            entity.HasOne(d => d.Uniform).WithMany(p => p.UniformItems)
+                .HasForeignKey(d => d.UniformId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__UniformIt__Unifo__4F7CD00D");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CC4C1B3A9721");
+            entity.HasKey(e => e.UserId).HasName("PK__User__1788CC4CB767E513");
 
-            entity.HasIndex(e => e.Email, "UQ__Users__A9D10534DEF7D8E4").IsUnique();
+            entity.ToTable("User");
+
+            entity.HasIndex(e => e.Email, "UQ__User__A9D105342665B3E4").IsUnique();
 
             entity.Property(e => e.Address).HasMaxLength(255);
             entity.Property(e => e.Email).HasMaxLength(100);
@@ -225,7 +263,7 @@ public partial class TextilesGeomarDBContext : DbContext
             entity.HasOne(d => d.Role).WithMany(p => p.Users)
                 .HasForeignKey(d => d.RoleId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Users__RoleId__3B75D760");
+                .HasConstraintName("FK__User__RoleId__3B75D760");
         });
 
         OnModelCreatingPartial(modelBuilder);
