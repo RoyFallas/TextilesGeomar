@@ -1,10 +1,11 @@
 ﻿using TextilesGeomar.Core.Entities;
+using TextilesGeomar.Core.Models.DTOs;
 
 namespace TextilesGeomar.Core.Interfaces.Repositories
 {
     public interface IOrderRepository
     {
-        Task<IEnumerable<Order>> GetOrdersAsync();
-        Task<Order> GetOrderByIdAsync(int id);
+        Task<IEnumerable<OrderDto>> GetOrders();
+        Task<IEnumerable<OrderDto>> GetOrderById(int id);
     }
 }

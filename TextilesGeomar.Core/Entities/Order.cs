@@ -15,6 +15,10 @@ public partial class Order
 
     public int StatusId { get; set; }
 
+    public decimal Discount { get; set; }
+
+    public decimal TotalPrice { get; set; }
+
     public DateTime CreatedDate { get; set; }
 
     public DateTime? CompletedDate { get; set; }
@@ -23,7 +27,7 @@ public partial class Order
 
     public virtual Institution? Institution { get; set; }
 
-    public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
+    public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
     public virtual Status Status { get; set; } = null!;
 

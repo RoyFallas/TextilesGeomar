@@ -1,18 +1,35 @@
 SELECT 
     o.OrderId,
-    od.OrderDetailId,
-    i.Name AS ItemName,
-    od.Quantity,
-    (od.Price - (od.Price * od.Discount / 100)) * od.Quantity AS OrderPrice,
-    i.Price AS ItemPrice,
-    od.Discount
-FROM
+    o.ClientId,
+    c.Name AS ClientName,
+    c.Email AS ClientEmail,
+    o.StatusId,
+    s.Name AS OrderStatus,
+    o.Discount AS OrderDiscount,
+    o.TotalPrice AS OrderTotalPrice,
+    o.CreatedDate AS OrderCreatedDate,
+    o.CompletedDate AS OrderCompletedDate,
+    -- Generate a list of order items as JSON
+    (
+        SELECT 
+            oi.OrderItemId,
+            i.Name AS ItemName,
+            oi.Quantity,
+            oi.Price AS ItemPrice,
+            (oi.Quantity * oi.Price) AS ItemTotal
+        FROM 
+            OrderItem oi
+        JOIN 
+            Item i ON oi.ItemId = i.ItemId
+        WHERE 
+            oi.OrderId = o.OrderId
+        FOR JSON PATH
+    ) AS OrderItems -- Nested list of order items as JSON
+FROM 
     [Order] o
-INNER JOIN
-    OrderDetail od ON o.OrderId = od.OrderId
-INNER JOIN
-    Item i ON od.ItemId = i.ItemId
-INNER JOIN
-    UniformItems ui ON od.UniformItemId = ui.UniformItemId
-INNER JOIN
-    Uniform u ON u.UniformId = ui.UniformId;
+JOIN 
+    Client c ON o.ClientId = c.ClientId
+JOIN 
+    Status s ON o.StatusId = s.StatusId
+WHERE 
+    o.OrderId = 1; -- Specify the OrderId you want to retrieve

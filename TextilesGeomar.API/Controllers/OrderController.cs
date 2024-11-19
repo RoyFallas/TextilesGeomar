@@ -26,7 +26,22 @@ namespace TextilesGeomar.API.Controllers
         {
             try
             {
-                var orders = await _orderService.GetOrdersAsync();
+                var orders = await _orderService.GetOrders();
+
+                return Ok(BaseResponse<IEnumerable<OrderDto>>.SuccessResponse(orders));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, BaseResponse<IEnumerable<OrderDto>>.ErrorResponse(ex.Message));
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<BaseResponse<OrderDto>>> GetOrderById(int id)
+        {
+            try
+            {
+                var orders = await _orderService.GetOrderById(id);
 
                 return Ok(BaseResponse<IEnumerable<OrderDto>>.SuccessResponse(orders));
             }

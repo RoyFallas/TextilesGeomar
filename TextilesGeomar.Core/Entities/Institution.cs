@@ -18,6 +18,4 @@ public partial class Institution
     public virtual ICollection<Item> Items { get; set; } = new List<Item>();
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
-
-    public virtual ICollection<Uniform> Uniforms { get; set; } = new List<Uniform>();
 }

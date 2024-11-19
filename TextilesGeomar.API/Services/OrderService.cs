@@ -1,6 +1,7 @@
 ﻿using TextilesGeomar.Core.Interfaces.Services;
 using TextilesGeomar.Core.Interfaces.Repositories;
 using TextilesGeomar.Core.Models.DTOs;
+using TextilesGeomar.Core.Entities;
 namespace TextilesGeomar.API.Services
 {
     public class OrderService : IOrderService
@@ -12,37 +13,14 @@ namespace TextilesGeomar.API.Services
             _orderRepository = orderRepository;
         }
 
-        public async Task<IEnumerable<OrderDto>> GetOrdersAsync()
+        public async Task<IEnumerable<OrderDto>> GetOrders()
         {
-            var orders = await _orderRepository.GetOrdersAsync();
-
-            return orders.Select(o => new OrderDto
-            {
-                OrderId = o.OrderId,
-                StatusId = o.StatusId,
-                CreatedDate = o.CreatedDate,
-                CompletedDate = o.CompletedDate,
-                ClientName = o.Client.Name + " " + o.Client.LastName,
-                InstitutionName = o.Institution?.Name ?? "N/A"
-            });
+            return await _orderRepository.GetOrders();
         }
 
-        public async Task<OrderDto> GetOrderByIdAsync(int id)
+        public async Task<IEnumerable<OrderDto>> GetOrderById(int id)
         {
-            var order = await _orderRepository.GetOrderByIdAsync(id);
-
-            if (order == null)
-                return null;
-
-            return new OrderDto
-            {
-                OrderId = order.OrderId,
-                StatusId = order.StatusId,
-                CreatedDate = order.CreatedDate,
-                CompletedDate = order.CompletedDate,
-                ClientName = order.Client.Name + " " + order.Client.LastName,
-                InstitutionName = order.Institution?.Name ?? "N/A"
-            };
+            return await _orderRepository.GetOrderById(id);
         }
     }
 }

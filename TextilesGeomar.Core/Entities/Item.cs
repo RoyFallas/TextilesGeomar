@@ -7,8 +7,6 @@ public partial class Item
 {
     public int ItemId { get; set; }
 
-    public int? UniformId { get; set; }
-
     public int? InstitutionId { get; set; }
 
     public string Name { get; set; } = null!;
@@ -25,11 +23,7 @@ public partial class Item
 
     public virtual Institution? Institution { get; set; }
 
-    public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
+    public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
     public virtual ICollection<PriceHistory> PriceHistories { get; set; } = new List<PriceHistory>();
-
-    public virtual Uniform? Uniform { get; set; }
-
-    public virtual ICollection<UniformItem> UniformItems { get; set; } = new List<UniformItem>();
 }

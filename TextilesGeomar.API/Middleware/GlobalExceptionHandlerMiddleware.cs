@@ -26,7 +26,7 @@ namespace TextilesGeomar.Middleware
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong: {ex.Message}");
-                var response = new BaseResponse<object>(null, "An unexpected error occurred.", 500);
+                var response = new BaseResponse<object>(null, ex.Message, 500);
                 httpContext.Response.StatusCode = 500;
                 await httpContext.Response.WriteAsJsonAsync(response);
             }

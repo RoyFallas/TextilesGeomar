@@ -1,18 +1,13 @@
 -- Disconnect users and drop the database if it exists
 USE master;
 GO
-
--- Check if the database is in use and disconnect if necessary
 ALTER DATABASE textilesgeomar SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
 DROP DATABASE IF EXISTS textilesgeomar;
 GO
 
 -- Create the database
 CREATE DATABASE textilesgeomar;
-PRINT 'Database "textilesgeomar" created successfully.';
 GO
-
--- Switch to the new database
 USE textilesgeomar;
 GO
 
@@ -63,18 +58,9 @@ CREATE TABLE Status (
     Description NVARCHAR(255)
 );
 
--- Uniforms Table (removed Price)
-CREATE TABLE Uniform (
-    UniformId INT PRIMARY KEY IDENTITY(1,1),
-    InstitutionId INT NULL,
-    Name NVARCHAR(100) NOT NULL,
-    FOREIGN KEY (InstitutionId) REFERENCES Institution(InstitutionId)
-);
-
 -- Items Table
 CREATE TABLE Item (
     ItemId INT PRIMARY KEY IDENTITY(1,1),
-    UniformId INT NULL,
     InstitutionId INT NULL,
     Name NVARCHAR(100) NOT NULL,
     Description NVARCHAR(255),
@@ -82,19 +68,7 @@ CREATE TABLE Item (
     Color NVARCHAR(50),
     FabricType NVARCHAR(50),
     Price DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (UniformId) REFERENCES Uniform(UniformId),
     FOREIGN KEY (InstitutionId) REFERENCES Institution(InstitutionId)
-);
-
--- UniformItems Table
-CREATE TABLE UniformItems (
-    UniformItemId INT PRIMARY KEY IDENTITY(1,1),
-    UniformId INT NOT NULL,
-    ItemId INT NOT NULL,
-    Quantity INT NOT NULL DEFAULT 1,
-    FOREIGN KEY (UniformId) REFERENCES Uniform(UniformId),
-    FOREIGN KEY (ItemId) REFERENCES Item(ItemId),
-    CONSTRAINT UC_UniformItem UNIQUE (UniformId, ItemId)
 );
 
 -- Orders Table
@@ -104,6 +78,8 @@ CREATE TABLE [Order] (
     InstitutionId INT NULL,
     UserId INT NOT NULL,
     StatusId INT NOT NULL,
+    Discount DECIMAL(5, 2) NOT NULL DEFAULT 0,
+    TotalPrice DECIMAL(10, 2) NOT NULL DEFAULT 0,
     CreatedDate DATETIME NOT NULL DEFAULT GETDATE(),
     CompletedDate DATETIME NULL,
     FOREIGN KEY (ClientId) REFERENCES Client(ClientId),
@@ -112,30 +88,25 @@ CREATE TABLE [Order] (
     FOREIGN KEY (StatusId) REFERENCES Status(StatusId)
 );
 
--- Order Details Table (added Discount)
-CREATE TABLE OrderDetail (
-    OrderDetailId INT PRIMARY KEY IDENTITY(1,1),
+-- Order Items Table
+CREATE TABLE OrderItem (
+    OrderItemId INT PRIMARY KEY IDENTITY(1,1),
     OrderId INT NOT NULL,
-    UniformItemId INT NULL,
-    ItemId INT NULL,
+    ItemId INT NOT NULL,
     Quantity INT NOT NULL DEFAULT 1,
     Price DECIMAL(10, 2) NOT NULL,
-    Discount DECIMAL(5, 2) NOT NULL DEFAULT 0, -- New field
     FOREIGN KEY (OrderId) REFERENCES [Order](OrderId),
-    FOREIGN KEY (UniformItemId) REFERENCES UniformItems(UniformItemId),
     FOREIGN KEY (ItemId) REFERENCES Item(ItemId)
 );
 
 -- Price Histories Table
 CREATE TABLE PriceHistory (
     PriceHistoryId INT PRIMARY KEY IDENTITY(1,1),
-    ItemId INT NULL,
-    UniformId INT NULL,
+    ItemId INT NOT NULL,
     Price DECIMAL(10, 2) NOT NULL,
     PriceChangeReason NVARCHAR(255),
     ChangeDate DATETIME NOT NULL DEFAULT GETDATE(),
-    FOREIGN KEY (ItemId) REFERENCES Item(ItemId),
-    FOREIGN KEY (UniformId) REFERENCES Uniform(UniformId)
+    FOREIGN KEY (ItemId) REFERENCES Item(ItemId)
 );
 
 -- Notification Histories Table

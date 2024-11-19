@@ -4,7 +4,7 @@ namespace TextilesGeomar.Core.Interfaces.Services
 {
     public interface IOrderService
     {
-        Task<IEnumerable<OrderDto>> GetOrdersAsync();
-        Task<OrderDto> GetOrderByIdAsync(int id);
+        Task<IEnumerable<OrderDto>> GetOrders();
+        Task<IEnumerable<OrderDto>> GetOrderById(int id);
     }
 }
