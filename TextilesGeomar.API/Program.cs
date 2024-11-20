@@ -15,10 +15,14 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<TextilesGeomarDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-//// Register services and repositories
+// Register services and repositories
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddSingleton<IRabbitMqProducerService, RabbitMqProducerService>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
 // Register Swagger for API documentation
 builder.Services.AddEndpointsApiExplorer();
