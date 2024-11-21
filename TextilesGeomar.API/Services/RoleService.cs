@@ -15,19 +15,21 @@ namespace TextilesGeomar.API.Services
             _repository = repository;
         }
 
-        public Task AddRole(Role Role)
+        public async Task AddRole(Role Role)
         {
-            throw new NotImplementedException();
+            await _repository.AddAsync(Role);
+            await _repository.SaveChangesAsync();
         }
 
-        public Task DeleteRole(int id)
+        public async Task DeleteRole(int id)
         {
-            throw new NotImplementedException();
+            await _repository.DeleteAsync(id);
+            await _repository.SaveChangesAsync();
         }
 
-        public Task<Role> GetRoleById(int id)
+        public async Task<Role> GetRoleById(int id)
         {
-            throw new NotImplementedException();
+            return await _repository.GetByIdAsync(id);
         }
 
         public async Task<IEnumerable<Role>> GetRoles()
@@ -36,9 +38,10 @@ namespace TextilesGeomar.API.Services
             return await _repository.GetAllAsync();
         }
 
-        public Task UpdateRole(Role Role)
+        public async Task UpdateRole(Role Role)
         {
-            throw new NotImplementedException();
+            await _repository.UpdateAsync(Role);
+            await _repository.SaveChangesAsync();
         }
     }
 }

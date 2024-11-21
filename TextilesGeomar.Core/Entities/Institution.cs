@@ -13,9 +13,9 @@ public partial class Institution
 
     public string? Phone { get; set; }
 
-    public virtual ICollection<Client> Clients { get; set; } = new List<Client>();
+    public virtual ICollection<Client>? Clients { get; set; } = new List<Client>();
 
-    public virtual ICollection<Item> Items { get; set; } = new List<Item>();
+    public virtual ICollection<Item>? Items { get; set; } = new List<Item>();
 
-    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+    public virtual ICollection<Order>? Orders { get; set; } = new List<Order>();
 }

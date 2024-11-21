@@ -22,30 +22,32 @@ namespace TextilesGeomar.API.Controllers
             return Ok(users);
         }
 
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<User>> GetUserById(int id)
-        //{
-        //    var user = await _userService.GetUserById(id);
-        //    return Ok(user);
-        //}
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Role>> GetRoleById(int id)
+        {
+            var user = await _roleService.GetRoleById(id);
+            return Ok(user);
+        }
 
-        //[HttpPost]
-        //public async Task<ActionResult> AddUser([FromBody] User user)
-        //{
-        //    await _userService.AddUser(user);
-        //    return CreatedAtAction(nameof(GetUserById), new { id = user.UserId }, user);
-        //}
-        //[HttpPut]
-        //public async Task<ActionResult> UpdateUser([FromBody] User user)
-        //{
-        //    await _userService.UpdateUser(user);
-        //    return CreatedAtAction(nameof(GetUserById), new { id = user.UserId }, user);
-        //}
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult> DeleteUser(int id)
-        //{
-        //    await _userService.DeleteUser(id);
-        //    return NoContent();
-        //}
+        [HttpPost]
+        public async Task<ActionResult> AddRole([FromBody] Role role)
+        {
+            await _roleService.AddRole(role);
+            return CreatedAtAction(nameof(GetRoleById), new { id = role.RoleId }, role);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateRole([FromBody] Role role)
+        {
+            await _roleService.UpdateRole(role);
+            return CreatedAtAction($"{nameof(UpdateRole)}", new { id = role.RoleId }, role);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteRole(int id)
+        {
+            await _roleService.DeleteRole(id);
+            return NoContent();
+        }
     }
 }
